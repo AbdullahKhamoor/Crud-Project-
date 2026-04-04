@@ -2,16 +2,21 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const UserModel = require("../server/Models/User.js")
+require('dotenv').config();
 
+// const MONGO_URL = process.env.MONGO_URL
 
 const app = express()
 app.use(cors())
 app.use(express.json())
 
-mongoose.connect("mongodb://127.0.0.1:27017/crud")
-mongoose.connection.on("connected", () => {
-    console.log("Connected_to_MongoDb")
-})
+mongoose.connect(process.env.MONGODB_URL)
+.then(() => console.log("MongoDB connected"))
+  .catch(err => console.log(err));
+
+// mongoose.connection.on("connected", () => {
+//     console.log("Connected_to_MongoDb")
+// })
 app.get("/", (req,res) => {
     UserModel.find()
     .then(users =>  res.json(users))
@@ -49,6 +54,9 @@ app.delete('/deleteuser/:id',(req,res)=> {
 //    console.log("Server is Running")
 // })
 
-export default function handler(req, res) {
+// export default function handler(req, res) {
+//   res.json({ message: "API working" });
+// }
+module.exports =  function handler(req, res) {
   res.json({ message: "API working" });
 }
