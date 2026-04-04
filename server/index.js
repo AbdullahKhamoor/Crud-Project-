@@ -45,6 +45,10 @@ app.delete('/deleteuser/:id',(req,res)=> {
 })
 
 
-app.listen(3001, ()=>{
-   console.log("Server is Running")
-})
+// app.listen(3001, ()=>{
+//    console.log("Server is Running")
+// })
+
+export default function handler(req, res) {
+  res.json({ message: "API working" });
+}
