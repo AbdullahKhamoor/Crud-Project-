@@ -3,42 +3,43 @@ import axios from 'axios'
 import { useDispatch } from "react-redux";
 import { getUser } from "./redux/userSliced";
 import { useEffect } from "react";
-import {Routes,Route} from "react-router-dom"
-import  Users  from './Users';
+import { Routes, Route } from "react-router-dom"
+import Users from './Users';
 import CreateUser from "./CreateUser";
 import UpdateUser from "./UpdateUser";
 
-function App  ()  {
+function App() {
 
-   const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-   useEffect(()=> {
-      
-    const fetchData = async () => { 
-      try{
+  useEffect(() => {
 
-        const response =  await axios.get('http://localhost:3001');
+    const fetchData = async () => {
+      try {
+
+        // const response =  await axios.get('http://localhost:3001');
+        const response = await axios.get('/api/');
         dispatch(getUser(response.data))
-      } catch(err){
-           console.log(err)
+      } catch (err) {
+        console.log(err)
       }
     }
-   
+
     fetchData()
 
-   }, [])
+  }, [])
 
 
   return (
-   <>
-    <Routes>
-      <Route path="/" element={<Users />} /> 
-      <Route path="/create" element= {<CreateUser />} />
-      <Route path="/update/:id" element = {<UpdateUser />} />
-      {/* <Route path="*" element= {<p>Page Not found</p>} /> */}
-    </Routes>   
+    <>
+      <Routes>
+        <Route path="/" element={<Users />} />
+        <Route path="/create" element={<CreateUser />} />
+        <Route path="/update/:id" element={<UpdateUser />} />
+        {/* <Route path="*" element= {<p>Page Not found</p>} /> */}
+      </Routes>
 
-  </>
+    </>
   )
 }
 
