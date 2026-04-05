@@ -50,13 +50,15 @@ app.delete('/api/deleteuser/:id',(req,res)=> {
 })
 
 
-app.listen(3001, ()=>{
-   console.log("Server is Running")
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, ()=>{
+   console.log("Server is Running")             
 })  
 
 // export default function handler(req, res) {
 //   res.json({ message: "API working" });
 // }
-module.exports =  function handler(req, res) {
-  res.json({ message: "API working" });
-}
+// module.exports =  function handler(req, res) {
+//   res.json({ message: "API working" });
+// }
