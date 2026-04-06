@@ -4,6 +4,10 @@ import { updateUser } from './redux/userSliced'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router'
 
+
+const BASE_URL = import.meta.env.VITE_API_URL
+
+
 const UpdateUser = () => {
   const { id } = useParams()
   const users = useSelector(state => state.users.users)        //geting users values from redux store
@@ -19,7 +23,7 @@ const UpdateUser = () => {
 
   const handleUpdate = (e) => {
     e.preventDefault()
-    axios.put('http://localhost:3001/update/' + id, { name, email, age })
+    axios.put(`${BASE_URL}/update/` + id, { name, email, age })
       .then(res => {
         dispatch(updateUser({ id, name, email, age }))
         navigate('/')

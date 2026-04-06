@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteUser } from "./redux/userSliced";
 import axios from "axios"
 
+const BASE_URL = import.meta.env.VITE_API_URL
+
+
 function Users() {
 
   // const [users, setUsers] = useState([])
@@ -18,7 +21,7 @@ function Users() {
   const dispatch = useDispatch()
   // console.log(useSelector(state => state.users.users))
   const handleDelete = (id) => {
-    axios.delete('http://localhost:3001/deleteuser/' + id)
+    axios.delete(`${BASE_URL}/deleteuser/` + id)
       .then(res => {
         dispatch(deleteUser({ id }))
         console.log(res)

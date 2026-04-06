@@ -4,65 +4,67 @@ import { addUser } from './redux/userSliced'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
+const BASE_URL = import.meta.env.VITE_API_URL
+
 
 const CreateUser = () => {
 
-   const [name, setName]  = useState()
-   const [email, setEmail]  = useState()
-   const [age, setAge]  = useState()
+  const [name, setName] = useState()
+  const [email, setEmail] = useState()
+  const [age, setAge] = useState()
 
-   const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-   const navigate = useNavigate()
+  const navigate = useNavigate()
 
-   const handleSubmit = (e)=> {
-         e.preventDefault()
-         axios.post('http://localhost:3001/create', {name, email, age})
-         .then(res => { 
-          dispatch(addUser(res.data))
-          navigate('/')
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    axios.post(`${BASE_URL}/create`, { name, email, age })
+      .then(res => {
+        dispatch(addUser(res.data))
+        navigate('/')
 
-         })
-         .catch(err => console.log(err))
-   }
+      })
+      .catch(err => console.log(err))
+  }
 
   return (
     <div className='d-flex vh-100 bg-primary justify-content-center align-items-center'>
-    <div className='w-50 bg-white rounded p-3'>
+      <div className='w-50 bg-white rounded p-3'>
         <form onSubmit={handleSubmit}>
-            <h2>Add User</h2>
-            <div className='mb-2'>
-              <label htmlFor="">Name</label>
-              <input
-               type="text"
-               placeholder='Enter Name'
-               className='form-control'
-               onChange={(e)=> setName(e.target.value) }
-               />
-            </div>
-            <div className='mb-2'>
-              <label htmlFor="">Email</label>
-              <input
-               type="email"
-               placeholder='Enter Email'
-               className='form-control'
-               onChange={(e)=> setEmail(e.target.value) }
+          <h2>Add User</h2>
+          <div className='mb-2'>
+            <label htmlFor="">Name</label>
+            <input
+              type="text"
+              placeholder='Enter Name'
+              className='form-control'
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className='mb-2'>
+            <label htmlFor="">Email</label>
+            <input
+              type="email"
+              placeholder='Enter Email'
+              className='form-control'
+              onChange={(e) => setEmail(e.target.value)}
 
-               />
-            </div>
-            <div className='mb-2'>
-              <label htmlFor="">Age</label>
-              <input
-               type="text"
-               placeholder='Enter Age'
-               className='form-control'
-               onChange={(e)=> setAge(e.target.value) }
+            />
+          </div>
+          <div className='mb-2'>
+            <label htmlFor="">Age</label>
+            <input
+              type="text"
+              placeholder='Enter Age'
+              className='form-control'
+              onChange={(e) => setAge(e.target.value)}
 
-               />
-            </div>
-            <button className='btn btn-success'>Submit</button>
+            />
+          </div>
+          <button className='btn btn-success'>Submit</button>
         </form>
-    </div>
+      </div>
     </div>
   )
 }

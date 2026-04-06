@@ -8,6 +8,8 @@ import Users from './Users';
 import CreateUser from "./CreateUser";
 import UpdateUser from "./UpdateUser";
 
+const BASE_URL = import.meta.env.VITE_API_URL
+
 function App() {
 
   const dispatch = useDispatch()
@@ -17,8 +19,8 @@ function App() {
     const fetchData = async () => {
       try {
 
-        // const response =  await axios.get('http://localhost:3001');
-        const response = await axios.get('/api/');
+        const response = await axios.get(BASE_URL);
+        // const response = await axios.get('/api/');
         dispatch(getUser(response.data))
       } catch (err) {
         console.log(err)
